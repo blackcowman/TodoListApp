@@ -35,20 +35,21 @@ public class TodoList {
 
 	}
 
-	public void listAll() {
-		System.out.println("\n"
-				+ "inside list_All method\n");
-		for (TodoItem myitem : list) {
-			System.out.println(myitem.getTitle() + myitem.getDesc());
+	
+	public void listAll(TodoList l) {
+		System.out.println("[전체 목록]");
+		for (TodoItem item : l.getList()) {
+			System.out.println(item.toString());
+			System.out.println("");
 		}
 	}
-	
 	public void reverseList() {
 		Collections.reverse(list);
 	}
 
 	public void sortByDate() {
 		Collections.sort(list, new TodoSortByDate());
+
 	}
 
 	public int indexOf(TodoItem t) {
