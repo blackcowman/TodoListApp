@@ -11,7 +11,8 @@ public class Menu {
         System.out.println("5. 이름순 정렬 ( ls_name_asc )");
         System.out.println("6. 이름역순 정렬 ( ls_name_desc )");
         System.out.println("7. 날짜순 정렬 ( ls_date )");
-        System.out.println("8. 나가기 (Or press escape key to exit)");
+        System.out.println("8. 문자열 찾기 ( find )");
+        System.out.println("9. 나가기 (Or press escape key to exit)");
     }
     
     public static void prompt()

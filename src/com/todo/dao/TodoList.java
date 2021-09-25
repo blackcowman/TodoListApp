@@ -19,13 +19,18 @@ public class TodoList {
 	public void deleteItem(TodoItem t) {
 		list.remove(t);
 	}
+	
+	public int lengthList() {
+		return list.size();
+	}
 
 	void editItem(TodoItem t, TodoItem updated) {
 		int index = list.indexOf(t);
 		list.remove(index);
 		list.add(updated);
+		
 	}
-
+ 
 	public ArrayList<TodoItem> getList() {
 		return new ArrayList<TodoItem>(list);
 	}
@@ -61,5 +66,25 @@ public class TodoList {
 			if (title.equals(item.getTitle())) return true;
 		}
 		return false;
+	}
+	
+	public void isFind(String title) {
+		int i=0;
+		for (TodoItem item : list) {
+			if (item.getTitle().contains(title)) {
+				
+						System.out.print(++i+ ". ");
+						System.out.println(item.toString());
+						System.out.println("");
+						
+	
+			}else if (item.getDesc().contains(title)) {
+				System.out.print(++i+ ". ");
+				System.out.println(item.toString());
+				System.out.println("");
+				
+			}
+		}
+		
 	}
 }

@@ -70,6 +70,11 @@ public class TodoMain {
 			case "help":
 				Menu.displaymenu();
 				break;
+				
+			case "find":
+				String find = sc.next();
+				TodoUtil.FindList(l, find);
+				break;
 
 			default:
 				System.out.println("정확한 명령어를 입력하세요. (도움말 - help)");
