@@ -13,9 +13,10 @@ public class TodoMain {
 	
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
+		//l.importData("todolist.txt");
 		boolean isList = false;
 		boolean quit = false;
-		TodoUtil.LoadList(l,"todolist.txt");
+		
 		
 		
 		Menu.displaymenu();  
@@ -43,28 +44,30 @@ public class TodoMain {
 				TodoUtil.listAll(l);
 				break;
 
-			case "ls_name_asc":
-				l.sortByName();
-				isList = true;
-				System.out.print("이름순으로 정렬했습니다.\n");
+			case "ls_name":
+				System.out.print("제목순으로 정렬했습니다.\n");
+				TodoUtil.listAll(l,"title", 1);
 				break;
 
 			case "ls_name_desc":
-				l.sortByName();
-				l.reverseList();
-				isList = true;
-				System.out.print("이름역순으로 정렬했습니다.\n");
+				System.out.print("제목역순으로 정렬했습니다.\n");
+				TodoUtil.listAll(l,"title", 0);
 				break;
 				
 			case "ls_date":
-				l.sortByDate();
-				isList = true;
 				System.out.print("날짜순으로 정렬했습니다.\n");
+				TodoUtil.listAll(l,"due_date", 1);
+				break;
+				
+			case "ls_date_desc":
+				System.out.print("날짜역순으로 정렬했습니다.\n");
+				TodoUtil.listAll(l,"due_date", 0);
 				break;
 
 			case "exit":
 				quit = true;
-				TodoUtil.saveList(l, "todolist.txt");
+				System.out.println("저장되었습니다.");
+//				TodoUtil.saveList(l, "todolist.txt");
 				break;
 				
 			case "help":
@@ -73,15 +76,50 @@ public class TodoMain {
 				
 			case "find":
 				String find = sc.next();
-				TodoUtil.FindList(l, find);
+				TodoUtil.findList(l, find);
 				break;
-
+			case "ls_cate":
+				TodoUtil.listCateAll(l);
+				break;
+				
+			case "today":
+				String day = sc.nextLine().trim();
+				TodoUtil.findNextDayList(l,day);
+				break;
+			
+			case "ls_mustdo":
+				String mustdo = sc.nextLine().trim();
+				TodoUtil.findMustdoList(l,mustdo);
+				break;
+			
+			case "find_cate":
+				String cate = sc.nextLine().trim();
+				TodoUtil.findCateList(l,cate);
+				break;
+			case "comp":
+				int comp = sc.nextInt();
+				TodoUtil.completeItem(l,comp);
+				break;
+			case "ls_comp":
+				TodoUtil.findCompList(l,1);
+				break;
+			case "multi_comp":
+				System.out.println("몇개를 체크하실 겁니까?");
+				int repeat = sc.nextInt();
+				int mul_comp;
+				System.out.println("완료한 번호를 작성해주세요");
+				for(int i = 0; i<repeat; i++) {
+					mul_comp = sc.nextInt();
+					TodoUtil.completeItem(l,mul_comp);
+				}
+				System.out.println("체크를 완료했습니다");
+				break;
 			default:
 				System.out.println("정확한 명령어를 입력하세요. (도움말 - help)");
 				break;
 			}
 			
-			if(isList) l.listAll(l);
+			if(isList) l.listAll();
 		} while (!quit);
 //		TodoUtil.Savelist(l,"todolist.txt");
 	}
